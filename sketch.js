@@ -18,14 +18,24 @@ function draw() {
 
   // 更新 graphics 的內容
   graphics.background(0); // 設定背景為黑色
+  graphics.push(); // 儲存 graphics 畫布狀態
+  graphics.translate(graphics.width, 0); // 將畫布的原點移到右上角
+  graphics.scale(-1, 1); // 水平翻轉畫布
+
   for (let i = 0; i < capture.width; i += 20) {
     for (let j = 0; j < capture.height; j += 20) {
       let col = capture.get(i, j); // 取得 capture 對應位置的顏色
-      graphics.fill(col); // 設定圓的顏色
-      graphics.noStroke(); // 移除圓的邊框
-      graphics.ellipse(i + 10, j + 10, 15, 15); // 繪製圓，中心點偏移 10 以對齊單位格
+      graphics.fill(col); // 設定方框的顏色
+      graphics.noStroke(); // 移除邊框
+      graphics.rect(i, j, 18, 18); // 繪製方框
+
+      // 繪製中間的黑色圓
+      graphics.fill(0); // 設定圓的顏色為黑色
+      graphics.ellipse(i + 9, j + 9, 10, 10); // 繪製圓，中心點位於方框的中心
     }
   }
+
+  graphics.pop(); // 恢復 graphics 畫布狀態
 
   // 計算 graphics 的繪製位置，讓其居中
   let x = (width - capture.width) / 2; // 計算水平居中位置
@@ -37,5 +47,4 @@ function draw() {
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight); // 當視窗大小改變時，調整畫布大小
-  capture.size(windowWidth * 0.8, windowHeight * 0.8); // 調整影像大小
 }
