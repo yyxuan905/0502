@@ -15,8 +15,6 @@ function setup() {
 
 function draw() {
   background('#edede9'); // 確保背景顏色持續更新
-  let x = (width - capture.width) / 2; // 計算影像的水平居中位置
-  let y = (height - capture.height) / 2; // 計算影像的垂直居中位置
 
   // 更新 graphics 的內容
   graphics.background(0); // 設定背景為黑色
@@ -29,11 +27,8 @@ function draw() {
     }
   }
 
-  // 繪製 graphics 在視訊畫面的上方
-  image(graphics, x, y - capture.height / 2 - 10, capture.width, capture.height / 2);
-
-  // 繪製視訊畫面
-  image(capture, x, y, capture.width, capture.height);
+  // 將 graphics 的內容繪製到整個畫布
+  image(graphics, 0, 0, width, height);
 }
 
 function windowResized() {
