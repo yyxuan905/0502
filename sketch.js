@@ -27,8 +27,12 @@ function draw() {
     }
   }
 
-  // 將 graphics 的內容繪製到整個畫布
-  image(graphics, 0, 0, width, height);
+  // 計算 graphics 的繪製位置，讓其居中
+  let x = (width - capture.width) / 2; // 計算水平居中位置
+  let y = (height - capture.height) / 2; // 計算垂直居中位置
+
+  // 將 graphics 的內容繪製到畫布的中間
+  image(graphics, x, y, capture.width, capture.height);
 }
 
 function windowResized() {
